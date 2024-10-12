@@ -1,0 +1,752 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+    position: relative; /* Ensure pseudo-element is positioned relative to the body */
+    overflow: hidden; /* Prevent scrolling issues due to pseudo-element */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('image/cot-removebg-preview.png'); /* Path to the logo image */
+    background-position: right bottom; /* Position the image in the lower right corner */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-size: 350px; /* Adjust the size of the image as needed */
+    opacity: 0.5; /* Adjust the opacity here */
+    z-index: -1; /* Ensure the pseudo-element is behind the main content */
+
+}
+
+
+    .sidebar {
+      height: 100%;
+      width: 60; /* Initially collapsed to show icons only */
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: green;
+      transition: 0.3s;
+      overflow-x: hidden;
+      border-radius: 15px;
+      border-left-color: red;
+      transition: transform 0.3s ease;
+      
+    }
+
+    .sidebar a {
+      padding: 15px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #f1f1f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      background-color: white;
+      color: black;
+      border-left-color:green 3px;
+    }
+
+    .sidebar a span {
+      margin-left: 10px;
+      display: none; /* Text hidden initially */
+    }
+
+    .sidebar.active {
+      width: 250px; /* Expanded sidebar */
+      transform: translateX(0);
+    }
+
+    .sidebar.active a span {
+      display: inline-block; /* Show text on expand */
+    }
+
+    .logo {
+      width: 30px;
+      height: 30px;
+      display: block;
+      margin: 20px auto;  
+      cursor: pointer;
+      transition: 0.3s;
+      border-radius: 50%; /* Make the logo circular */
+    }
+
+    .sidebar.active .logo {
+      width: 200px;
+      height: auto;
+      margin: 20px auto;
+    }
+
+    /* Lower Home button */
+    .home-link {
+      margin-top: 80px; /* Adjust this value to lower the Home button */
+    }
+
+    .main-content {
+      margin-left: 80px;
+      padding: 16px;
+      transition: margin-left 0.3s; /* Smooth transition when sidebar expands/collapses */
+    }
+
+    /* Shift main content and header when sidebar is active */
+    .shifted {
+      margin-left: 260px; /* Adjust according to expanded sidebar width */
+    }
+
+    /* Header with space */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background-color: white;
+      border-bottom: 1px solid #ccc;
+      margin-left: 80px;
+      transition: margin-left 0.3s; /* Smooth transition */
+      height: 20px;
+    }
+
+    /* Adjust header when sidebar is active */
+    .header.shifted {
+      margin-left: 250px; /* Adjust according to the expanded sidebar width */
+    }
+
+      /* Content sections */
+      .content-section {
+        display: none; /* Hidden by default */
+      }
+
+      .content-section.active {
+        display: block; /* Show when active */
+      }
+
+    /* Logout button in the upper right corner */
+    .logout-btn {
+       
+        color:  #000543;
+        border-color: #000543;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        position: absolute; /* Position absolutely within the header */
+        top: 22px; /* Adjust as needed to position from the top edge */
+        right: 16px; /* Position from the right edge */
+        display: flex;
+       align-items: center; /* Align items vertically */
+}
+
+.logout-icon {
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+    margin-right: 9px; /* Space between icon and text */
+}
+
+
+    .logout-btn:hover {
+      background-color: #000543;
+      color:white;
+    }
+    .add-btn {
+       
+       color:  white;
+       background-color:green;
+       padding: 10px 20px;
+       cursor: pointer;
+       font-size: 16px;
+       border-radius: 10px;
+       position: absolute; /* Position absolutely within the header */
+       top: 150px; /* Adjust as needed to position from the top edge */
+       left: 300px; /* Position from the right edge */
+       display: flex;
+      align-items: center; /* Align items vertically */
+      }
+        .add-btn:hover {
+   
+        margin-right: 9px; /* Space between icon and text */
+        color:black;
+        background-color:white;
+        
+        }
+
+    
+
+    /* Responsive for small screens */
+    @media screen and (max-width: 600px) {
+      .sidebar {
+        width: 60px;
+      }
+
+      .sidebar.active {
+        width: 100%;
+      }
+
+      .main-content, .header {
+        margin-left: 60px;
+      }
+
+      .shifted {
+        margin-left: 100%;
+      }
+    }
+    .dbmain-content {
+            margin-left: 25px;
+            padding: 3px;
+        }
+        .dashboard-title {
+            font-size: 32px;
+            color: #000543;
+            margin-bottom: 20px;
+        }
+        .dashboard-cards {
+            display: flex;
+            justify-content: space-between;
+            border-color:gray;
+            padding: 10px;
+            gap: 20px;
+            text-align:left;
+        }
+        .card {
+            width: 22%;
+            padding: 20px;
+            text-align: left;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #ddd;
+            border-radius: 5px;
+        }
+        .card.course {
+            border-left-color: #f25c5c;
+        }
+        .card.course:hover{
+          background-color: #f25c5c;
+          color:white;
+          
+        }
+        .card.shift {
+            border-left-color:  #000543;
+        }
+        .card.shift:hover{
+          background-color:  #000543;
+          color:white;
+        }
+        
+        .card.intern {
+            border-left-color: #f2b25c;
+        }
+        .card.intern:hover{
+          background-color: #f2b25c;
+          color:white;
+        }
+        .card.company {
+            border-left-color: #5cf274;
+        }
+        .card.company:hover{
+          background-color: #5cf274;
+          color:white;
+        }
+        .announcement-board {
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            position: relative;
+            border: 1px solid #bc2649;
+            height: 350px;
+            width: 700px;
+            
+           
+          
+        }
+        .announcement-board h2 {
+            font-size: 24px;
+            color: #000543;
+            margin-bottom: 20px;
+        }
+        .announcement-board img {
+          opacity: 0.3; /* Set opacity to 0.5 */
+          width: 300px; /* Adjust width as needed */
+          height:300px;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+       
+          .input-container {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+          }
+
+          .styled-input {
+            width: 500px;
+            height:100px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            margin-top: 50px;    
+          }
+
+          .styled-input::placeholder {
+            color: #888;
+            font-style: italic;
+          }
+
+          .styled-input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+            outline: none;
+          }
+        .post-button {
+            background-color: #f2b25c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 100px;      
+          }
+         /* Ad
+          .post-button:hover {
+            background-color: #000543;
+            color:white;
+          }min details hidden by default */
+          #detail {
+            display: none;
+            color: white;
+            text-align: center;
+            font-size: 15px;
+            border-bottom: 5px solid #dcb455;  
+            border-radius: 25px;
+          }
+
+          /* Show admin details when sidebar is expanded */
+          .sidebar.active #detail {
+            display: block;
+          }
+     /* Modal styles */ /* Modal Background */
+    /* Modal Background *//* Modal Background */
+/* Modal Background */
+
+  /* Modal Content */
+ /* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 3;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+  }
+  
+  .Accmodal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 25%;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    margin-top: 15%;
+  }
+  
+  
+  /* Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Form Styles */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    flex: none;
+    width: 150px; /* Adjust width as needed */
+    margin-right: 5px;
+    text-align: left; /* Align labels to the right */
+  }
+  
+  .form-group input,
+  .form-group select {
+    flex: 1;
+    padding: 8px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+  }
+  
+  .form-group input[type="radio"],
+  .form-group input[type="checkbox"] {
+    flex: none;
+    margin-right: 10px;
+  }
+  
+  .form-group .gender-group,
+  .form-group .contact-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-group .gender-group label,
+  .form-group .contact-group label {
+    margin-right: 10px;
+  }
+  
+  .form-group .gender-group input[type="radio"],
+  .form-group .contact-group input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  .form-group input[type="date"],
+  .form-group input[type="number"] {
+    width: 100%;
+  }
+  
+  /* Ensure form width adapts to content */
+  .modal-content form {
+    width: 100%;
+  }
+  
+  .modal-content button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .modal-content button:hover {
+    background-color: #45a049;
+  }
+  
+
+ .form-control {
+    align-items: center;
+    gap: 150px; /* Space between label and input */
+   border-radius: 15px;
+  }
+
+  .form-inline + .form-inline {
+    margin-top: 50px; /* Space between the form rows */
+    
+  }
+  .intern_acc{
+    background-color:  #FF920C; /* Green background */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 55px 715px; /* Padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Inline block for button styling */
+    font-size: 16px; /* Font size */
+    margin: 4px 2px; /* Margins */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Rounded corners */
+    
+  }
+  .intern_acc:hover {
+    background-color:  #000543;
+  }
+
+  .faci_acc{
+    background-color:  #FF920C; /* Green background */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 55px 715px; /* Padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Inline block for button styling */
+    font-size: 16px; /* Font size */
+    margin: 4px 2px; /* Margins */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Rounded corners */
+    
+  }
+  .faci_acc:hover {
+    background-color:  #000543;
+  }
+
+    .Intern_profile{
+      background-color:  #FF920C; /* Green background */
+      color: white; /* Text color */
+      border: none; /* Remove border */
+      padding: 55px 715px; /* Padding */
+      text-align: center; /* Center text */
+      text-decoration: none; /* Remove underline */
+      display: inline-block; /* Inline block for button styling */
+      font-size: 16px; /* Font size */
+      margin: 4px 2px; /* Margins */
+      cursor: pointer; /* Pointer cursor on hover */
+      border-radius: 4px; /* Rounded corners */
+      
+    }
+    .Intern_profile:hover {
+      background-color:  #000543;
+}
+
+.db_Details{
+ text-align: center;
+  font-size: 55px;
+  margin-top: 10%;
+}
+
+/* Add this to your external CSS file */
+
+/* Container for positioning */
+.bottom-right-corner {
+  position: fixed; /* Fixes the button's position relative to the viewport */
+  bottom: 20px; /* Adjust the distance from the bottom */
+  right: 20px; /* Adjust the distance from the right */
+  z-index: 1000; /* Ensures the button stays above other content */
+}
+
+
+.profile-button {
+  position: absolute; /* Position relative to the sidebar */
+  bottom: 20px; /* Distance from the bottom of the sidebar */
+  right: 20px; /* Distance from the right of the sidebar */
+  background-color: #FF920C; /* Button background color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Padding */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  display: inline-flex; /* Flexbox for centering icon and text */
+  align-items: center; /* Vertically center the content */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+  z-index: 1000; /* Ensure button is above other content */
+}
+
+.profile-button:hover {
+  background-color: #000543; /* Background color on hover */
+}
+
+.profile-button i {
+  margin-right: 8px; /* Space between icon and text */
+}
+.Coverimg{
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(110.1deg, rgb(34, 126, 34) 2.9%, rgb(168, 251, 60) 90.3%);
+  border-radius: 25px;
+  border-style:1px solid;
+  align-items: center;
+  width: calc(100% - 60px); /* Initial width when sidebar is collapsed */
+  transition: all 0.3s ease; /* Smooth transition */
+
+  
+  
+}
+
+
+.myprofileimg {
+  position: absolute; /* Position absolutely within the sidebar */
+  top: 15%; /* Distance from the bottom of the container */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust horizontal centering */
+  width: 200px; /* Adjust the width to make the image bigger */
+  height: 200px; /* Maintain aspect ratio */
+  border-radius: 50%; /* Optional: make it circular */
+  cursor: pointer; /* Pointer cursor on hover */
+  border: 7px solid #f1f1f1;
+  align-items: center;
+
+
+}
+.sidebar.active .Coverimg {
+  width: calc(100% - 250px); /* Adjust width for expanded sidebar */
+  margin-left: 250px; /* Adjust margin for expanded sidebar */
+}
+
+.Coverimg .input{
+  border-radius: 25px;
+}
+
+
+.profile-details{
+  margin-top: 9%;
+  width: 30%;
+}
+
+.profile-input {
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 10px; /* Border radius for input fields */
+  border: 1px solid #ccc;
+  width: 150px; /* Adjusted smaller width */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+.update-btn {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Padding */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  margin-top: 20px; /* Space above the button */
+  display: block; /* Make button a block-level element for centering */
+  width: fit-content; /* Adjust width to fit the content */
+  margin-left: auto; /* Center the button horizontally */
+  margin-right: auto; /* Center the button horizontally */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.update-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+ /* display data table css */
+ /* Table Styles */
+table {
+  width: 100%; /* Make the table take the full width */
+  border-collapse: collapse; /* Combine borders for a cleaner look */
+  margin-top: 20px; /* Space above the table */
+}
+
+th, td {
+  padding: 12px 15px; /* Space inside cells */
+  text-align: left; /* Align text to the left */
+}
+
+th {
+  background-color: #4CAF50; /* Header background color */
+  color: white; /* Header text color */
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Zebra striping for even rows */
+}
+
+tr:hover {
+  background-color: #e0e0e0; /* Highlight row on hover */
+}
+
+/* Form Styles */
+form {
+  display: inline-block; /* Align forms next to each other */
+}
+
+input[type="password"] {
+  padding: 5px; /* Space inside password field */
+  margin-right: 5px; /* Space between password field and button */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Button Styles */
+button {
+  background-color: #008CBA; /* Button background color */
+  color: white; /* Button text color */
+  padding: 8px 12px; /* Space inside buttons */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Change cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+  background-color: #005f7a; /* Darker background on hover */
+}
+
+
+.alert {
+  padding: 15px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  position: fixed; /* Use fixed positioning */
+  bottom: 20px; /* Distance from the bottom */
+  right: 20px; /* Distance from the right */
+  z-index: 1000; /* Make sure it appears on top of other elements */
+}
+
+.table-container {
+  max-width: 800px; /* Set a max width for the table */
+  margin: 0 auto; /* Center the table horizontally */
+  overflow-x: auto; /* Allow horizontal scrolling on small screens */
+}
+
+table {
+  width: 100%; /* Make the table responsive */
+  border-collapse: collapse; /* Remove space between borders */
+}
+
+th, td {
+  padding: 15px; /* Add padding to table cells */
+  text-align: left; /* Align text to the left */
+}
+
+th {
+  background-color: #f2f2f2; /* Add a background color to the header */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Add zebra stripes for better readability */
+}
+
+tr:hover {
+  background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+button {
+  margin-left: 5px; /* Add space between buttons */
+}
